@@ -2,27 +2,34 @@ document.addEventListener("DOMContentLoaded", () => {
         clearBoxValue();
 });
 document.getElementById("clear").addEventListener("click", () => {
+        clearBoxValue();
+});
+
+// function for clear button and clear upon refesh
+function clearBoxValue() {
         expression.firstNumber = "";
         expression.secondNumber = "";
         expression.method = "";
         expression.isGoing = true;
-        clearBoxValue();
-});
-
-function clearBoxValue() {
         box.value = "";
 }
 
+// reuseable variable for the textbox
 const box = document.getElementById("box");
 
-const numberKeys = document.getElementsByClassName("number");
-
-let expression = {
+// math expression object
+const expression = {
         firstNumber: "",
         secondNumber: "",
         isGoing: true,
         method: "",
+        memoryNumberOne: "",
+        memoryNumberTwo: "",
+        memoryMethod: "",
 };
+
+// loops through number keys and displays them on the screen
+const numberKeys = document.getElementsByClassName("number");
 
 for (let i = 0; i < numberKeys.length; i++) {
         const button = numberKeys[i];
@@ -36,6 +43,7 @@ for (let i = 0; i < numberKeys.length; i++) {
         });
 }
 
+// click functions for the math method buttons
 document.getElementById("plus").addEventListener("click", () => {
         displayAnswer();
         expression.method = "plus";
@@ -58,9 +66,11 @@ document.getElementById("divide").addEventListener("click", () => {
 
 document.getElementById("equal").addEventListener("click", () => {
         displayAnswer();
+        updateExpression(box.value);
         expression.method = "";
 });
 
+// math functions--> passes the result to the update expression function
 function addNumbers(number1, number2) {
         const result = parseFloat(number1) + parseFloat(number2);
         box.value = result;
@@ -85,6 +95,7 @@ function divideNumbers(number1, number2) {
         updateExpression(result);
 }
 
+// function to display the answer on the screen by passing values to math functions
 function displayAnswer() {
         if (expression.firstNumber === "") {
                 expression.firstNumber = parseFloat(box.value);
@@ -103,8 +114,47 @@ function displayAnswer() {
         }
 }
 
+// updates the "expression" with the current data
 function updateExpression(number) {
         expression.isGoing = false;
         expression.firstNumber = number;
         expression.secondNumber = "";
 }
+
+// memory key functions
+document.getElementById("memory-plus").addEventListener("click", () => {
+        expression.memoryNumberOne = "";
+        expression.memoryMethod = "plus";
+});
+
+document.getElementById("memory-minus").addEventListener("click", () => {
+        expression.memoryMethod = "minus";
+});
+
+document.getElementById("memory-recall").addEventListener("click", () => {
+        expression.memoryMethod = "";
+});
+
+// single key expressions
+document.getElementById("pi").addEventListener("click", () => {
+        box.value = Math.PI;
+});
+
+document.getElementById("square").addEventListener("click", () => {
+        if (box.value === "") {
+                return;
+        }
+        box.value = Math.sqrt(box.value);
+});
+
+document.getElementById("negative").addEventListener("click", () => {
+        if (box.value === "") {
+                box.value = "-";
+        } else {
+                box.value = -box.value;
+        }
+});
+
+document.getElementById("percent").addEventListener("click", () => {
+        box.value = parseFloat(box.value) * 0.01;
+});
