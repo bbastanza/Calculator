@@ -9,7 +9,12 @@
         <body>
                 <div id="container">
                         <div id="text">
-                                <input id="box" type="text" style="text-align: right; margin: 0 auto 20px;" />
+                                <input
+                                        id="box"
+                                        type="text"
+                                        style="text-align: right; margin: 0 auto 20px;"
+                                        onkeypress="return isValidNumber(event)"
+                                />
                         </div>
 
                         <div id="line-1">
@@ -40,11 +45,15 @@
                                 <input id="zero" class="button number" type="button" value="0" />
                                 <input class="button number" type="button" value="." />
                                 <input id="equal" class="button" type="button" value="=" />
-                                <input id="clear" class="button" type="button" value="C" />
+                                <input id="memory-clear" class="button" type="button" value="MC" />
                         </div>
                         <div id="line-6">
-                                <input id="negative" class="button" type="button" value="-n" />
+                                <input id="clear" class="button" type="button" value="C" />
+                                <input id="all-clear" class="button" type="button" value="AC" />
+                        </div>
+                        <div id="line-7">
                                 <input id="percent" class="button" type="button" value="%" />
+                                <input id="negative" class="button" type="button" value="-n" />
                                 <input id="pi" class="button" type="button" value="π" />
                                 <input id="square" class="button" type="button" value="√" />
                         </div>

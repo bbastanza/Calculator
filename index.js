@@ -1,3 +1,6 @@
+//
+// -------------------------- Project 5* Calculator-----------------------------------------------
+//
 document.addEventListener("DOMContentLoaded", () => {
         clearBoxValue();
 });
@@ -23,9 +26,7 @@ const expression = {
         secondNumber: "",
         isGoing: true,
         method: "",
-        memoryNumberOne: "",
-        memoryNumberTwo: "",
-        memoryMethod: "",
+        memoryNumber: 0,
 };
 
 // loops through number keys and displays them on the screen
@@ -123,16 +124,24 @@ function updateExpression(number) {
 
 // memory key functions
 document.getElementById("memory-plus").addEventListener("click", () => {
-        expression.memoryNumberOne = "";
-        expression.memoryMethod = "plus";
+        expression.memoryNumber = expression.memoryNumber + parseFloat(box.value);
 });
 
 document.getElementById("memory-minus").addEventListener("click", () => {
-        expression.memoryMethod = "minus";
+        expression.memoryNumber = expression.memoryNumber - parseFloat(box.value);
 });
 
 document.getElementById("memory-recall").addEventListener("click", () => {
-        expression.memoryMethod = "";
+        box.value = expression.memoryNumber;
+});
+
+document.getElementById("memory-clear").addEventListener("click", () => {
+        expression.memoryNumber = 0;
+});
+
+document.getElementById("all-clear").addEventListener("click", () => {
+        clearBoxValue();
+        expression.memoryNumber = 0;
 });
 
 // single key expressions
@@ -158,3 +167,8 @@ document.getElementById("negative").addEventListener("click", () => {
 document.getElementById("percent").addEventListener("click", () => {
         box.value = parseFloat(box.value) * 0.01;
 });
+
+// function to check only allow numbers in text box
+function isValidNumber(e) {
+        return e.which > 47 && e.which < 58 ? true : false;
+}
