@@ -1,64 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-        <head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>Calculator</title>
-                <link rel="stylesheet" href="style.css" />
-        </head>
-        <body>
-                <div id="container">
-                        <div id="text">
-                                <input
-                                        id="box"
-                                        type="text"
-                                        style="text-align: right; margin: 0 auto 20px;"
-                                        onkeypress="return isValidNumber(event)"
-                                />
-                        </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Calculator</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="text">
+                <input id="box" type="text" onkeypress="return isTextInputANumber(event)" onpaste="return false" />
+            </div>
 
-                        <div id="line-1">
-                                <input id="plus" class="button function" type="button" value="+" />
-                                <input id="minus" class="button function" type="button" value="-" />
-                                <input id="multiply" class="button function" type="button" value="x" />
-                                <input id="divide" class="button function" type="button" value="/" />
-                        </div>
-                        <div id="line-2">
-                                <input class="button number" type="button" value="7" />
-                                <input class="button number" type="button" value="8" />
-                                <input class="button number" type="button" value="9" />
-                                <input id="memory-recall" class="button" type="button" value="MR" />
-                        </div>
-                        <div id="line-3">
-                                <input class="button number" type="button" value="4" />
-                                <input class="button number" type="button" value="5" />
-                                <input class="button number" type="button" value="6" />
-                                <input id="memory-plus" class="button" type="button" value="M+" />
-                        </div>
-                        <div id="line-4">
-                                <input class="button number" type="button" value="1" />
-                                <input class="button number" type="button" value="2" />
-                                <input class="button number" type="button" value="3" />
-                                <input id="memory-minus" class="button" type="button" value="M-" />
-                        </div>
-                        <div id="line-5">
-                                <input id="zero" class="button number" type="button" value="0" />
-                                <input class="button number" type="button" value="." />
-                                <input id="equal" class="button" type="button" value="=" />
-                                <input id="memory-clear" class="button" type="button" value="MC" />
-                        </div>
-                        <div id="line-6">
-                                <input id="clear" class="button" type="button" value="C" />
-                                <input id="all-clear" class="button" type="button" value="AC" />
-                        </div>
-                        <div id="line-7">
-                                <input id="percent" class="button" type="button" value="%" />
-                                <input id="negative" class="button" type="button" value="-n" />
-                                <input id="pi" class="button" type="button" value="π" />
-                                <input id="square" class="button" type="button" value="√" />
-                        </div>
-                </div>
+            <div id="line-1">
+                <input id="plus" class="button function" type="button" value="+" />
+                <input id="minus" class="button function" type="button" value="-" />
+                <input id="multiply" class="button function" type="button" value="x" />
+                <input id="divide" class="button function" type="button" value="/" />
+            </div>
+            <div id="line-2">
+                <input class="button number" type="button" value="7" />
+                <input class="button number" type="button" value="8" />
+                <input class="button number" type="button" value="9" />
+                <input id="memory-recall" class="button" type="button" value="MR" />
+            </div>
+            <div id="line-3">
+                <input class="button number" type="button" value="4" />
+                <input class="button number" type="button" value="5" />
+                <input class="button number" type="button" value="6" />
+                <input id="memory-plus" class="button" type="button" value="M+" />
+            </div>
+            <div id="line-4">
+                <input class="button number" type="button" value="1" />
+                <input class="button number" type="button" value="2" />
+                <input class="button number" type="button" value="3" />
+                <input id="memory-minus" class="button" type="button" value="M-" />
+            </div>
+            <div id="line-5">
+                <input id="zero" class="button number" type="button" value="0" />
+                <input id="decimal" class="button" type="button" value="." />
+                <input id="equal" class="button" type="button" value="=" />
+                <input id="memory-clear" class="button" type="button" value="MC" />
+            </div>
+            <div id="line-6">
+                <input id="clear" class="button" type="button" value="C" />
+                <input id="all-clear" class="button" type="button" value="AC" />
+            </div>
+            <h2 id="memory">Memory: 0</h2>
+        </div>
 
-                <script src="index.js"></script>
-        </body>
+        <script src="index.js"></script>
+    </body>
 </html>
