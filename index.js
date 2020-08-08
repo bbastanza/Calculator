@@ -18,7 +18,7 @@ function clearBoxValue() {
 }
 
 // reuseable variable for the textbox
-const box = document.getElementById("box");
+const textBox = document.getElementById("box");
 
 // math expression object
 const expression = {
@@ -31,23 +31,12 @@ const expression = {
     editFirstNumber: true,
 };
 
-const singleKeyExpression = {
-    firstNumberPi: false,
-    firstNumberNegative: false,
-    firstNumberPercent: false,
-    firstNumberSquareRoot: false,
-    secondNumberPi: false,
-    secondNumberNegative: false,
-    secondNumberPercent: false,
-    secondNumberSquareRoot: false,
-};
-
 const decimal = document.getElementById("decimal").addEventListener("click", () => {
-    if ((box.value = "")) {
-        box.value = ".";
+    if ((textBox.value = "")) {
+        textBox.value = ".";
         expression.decimalInValue = true;
     } else if (!expression.decimalInValue) {
-        box.value = box.value + ".";
+        textBox.value = textBox.value + ".";
         expression.decimalInValue = true;
     }
 });
@@ -59,9 +48,9 @@ for (let i = 0; i < numberKeys.length; i++) {
     const button = numberKeys[i];
     button.addEventListener("click", function (e) {
         if (expression.continuousText === true) {
-            box.value = box.value + e.target.value;
+            textBox.value = textBox.value + e.target.value;
         } else {
-            box.value = e.target.value;
+            textBox.value = e.target.value;
             expression.continuousText = !expression.continuousText;
         }
     });
@@ -69,47 +58,52 @@ for (let i = 0; i < numberKeys.length; i++) {
 
 // click functions for the math method buttons
 document.getElementById("plus").addEventListener("click", () => {
+    expression.editFirstNumber = false;
     displayAnswer();
     expression.method = "plus";
 });
 
 document.getElementById("minus").addEventListener("click", () => {
+    expression.editFirstNumber = false;
     displayAnswer();
     expression.method = "minus";
 });
 
 document.getElementById("multiply").addEventListener("click", () => {
+    expression.editFirstNumber = false;
     displayAnswer();
     expression.method = "multiply";
 });
 
 document.getElementById("divide").addEventListener("click", () => {
+    expression.editFirstNumber = false;
     displayAnswer();
     expression.method = "divide";
 });
 
 document.getElementById("equal").addEventListener("click", () => {
+    expression.editFirstNumber = true;
     displayAnswer();
-    updateExpression(box.value);
+    updateExpression(textBox.value);
     expression.method = "";
 });
 
 // math functions--> passes the result to the update expression function
 function addNumbers(number1, number2) {
     const result = parseFloat(number1) + parseFloat(number2);
-    box.value = result;
+    textBox.value = result;
     updateExpression(result);
 }
 
 function subtractNumbers(number1, number2) {
     const result = parseFloat(number1) - parseFloat(number2);
-    box.value = result;
+    textBox.value = result;
     updateExpression(result);
 }
 
 function multiplyNumbers(number1, number2) {
     const result = parseFloat(number1) * parseFloat(number2);
-    box.value = result;
+    textBox.value = result;
     updateExpression(result);
 }
 
@@ -122,20 +116,14 @@ function divideNumbers(number1, number2) {
 // function to display the answer on the screen by passing values to math functions
 function displayAnswer() {
     if (expression.firstNumber === "") {
-        expression.firstNumber = parseFloat(box.value);
+        expression.firstNumber = parseFloat(textBox.value);
         expression.continuousText = false;
         return;
     }
-    expression.secondNumber = parseFloat(box.value);
+    expression.secondNumber = parseFloat(textBox.value);
 
-    let firstNumber = checkForNegative(expression.firstNumber, singleKeyExpression.firstNumberNegative);
-    firstNumber = checkForPi(firstNumber, singleKeyExpression.firstNumberPi);
-    firstNumber = checkForPercent(firstNumber, singleKeyExpression.firstNumberPercent);
-    firstNumber = checkForSquareRoot(firstNumber, singleKeyExpression.firstNumberSquareRoot);
-    let secondNumber = checkForNegative(expression.secondNumber, singleKeyExpression.secondNumberNegative);
-    secondNumber = checkForPi(secondNumber, singleKeyExpression.secondNumberPi);
-    secondNumber = checkForPercent(secondNumber, singleKeyExpression.secondNumberPercent);
-    secondNumber = checkForSquareRoot(secondNumber, singleKeyExpression.secondNumberSquareRoot);
+    const firstNumber = expression.firstNumber;
+    const secondNumber = expression.secondNumber;
 
     if (expression.method === "plus") {
         addNumbers(firstNumber, secondNumber);
@@ -148,27 +136,28 @@ function displayAnswer() {
     }
 }
 
-// updates the "expression" with the current data
 function updateExpression(number) {
     expression.continuousText = false;
     expression.firstNumber = number;
     expression.secondNumber = "";
-    resetSingleKeys();
 }
 
 let memory = document.getElementById("memory");
 document.getElementById("memory-plus").addEventListener("click", () => {
-    expression.memoryNumber = expression.memoryNumber + parseFloat(box.value);
+    expression.memoryNumber = expression.memoryNumber + parseFloat(textBox.value);
     memory.textContent = `Memory: ${expression.memoryNumber}`;
 });
 
 document.getElementById("memory-minus").addEventListener("click", () => {
-    expression.memoryNumber = expression.memoryNumber - parseFloat(box.value);
+    expression.memoryNumber = expression.memoryNumber - parseFloat(textBox.value);
     memory.textContent = `Memory: ${expression.memoryNumber}`;
 });
 
 document.getElementById("memory-recall").addEventListener("click", () => {
-    box.value = expression.memoryNumber;
+    textBox.value = expression.memoryNumber;
+    if ((expression.editFirstNumber = true)) {
+        expression.firstNumber = textBox.value;
+    }
 });
 
 document.getElementById("memory-clear").addEventListener("click", () => {
@@ -187,84 +176,43 @@ function isTextInputANumber(e) {
 }
 // single key expressions
 document.getElementById("pi").addEventListener("click", () => {
-    box.value = Math.PI;
+    textBox.value = Math.PI;
     if (expression.editFirstNumber) {
-        singleKeyExpression.firstNumberPi = !singleKeyExpression.firstNumberPi;
-    } else {
-        singleKeyExpression.secondNumberPi = !singleKeyExpression.secondNumberPi;
+        expression.firstNumber = Math.PI;
     }
 });
 
 document.getElementById("square").addEventListener("click", () => {
-    if (box.value === "") {
+    if (textBox.value === "") {
         return;
     }
-    box.value = Math.sqrt(box.value);
+    if (parseFloat(textBox.value) < 0) {
+        alert("You can't take the Square Root of a negative number!");
+        return;
+    }
+    textBox.value = Math.sqrt(textBox.value);
     if (expression.editFirstNumber) {
-        singleKeyExpression.firstNumberSquareRoot = !singleKeyExpression.firstNumberSquareRoot;
-    } else {
-        singleKeyExpression.secondNumberSquareRoot = !singleKeyExpression.secondNumberSquareRoot;
+        expression.firstNumber = math.sqrt(expression.firstNumber);
     }
 });
 
 document.getElementById("negative").addEventListener("click", () => {
-    if (box.value === "") {
-        box.value = "-";
+    if (textBox.value === "") {
+        textBox.value = "-";
     } else {
-        box.value = -box.value;
+        textBox.value = -textBox.value;
         if (expression.editFirstNumber) {
-            singleKeyExpression.firstNumberNegative = !singleKeyExpression.firstNumberNegative;
-        } else {
-            singleKeyExpression.secondNumberNegative = !singleKeyExpression.secondNumberNegative;
+            expression.firstNumber = -expression.firstNumber;
         }
     }
 });
 
 document.getElementById("percent").addEventListener("click", () => {
-    if (box.value === "") {
+    if (textBox.value === "") {
         return;
     }
-    box.value = parseFloat(box.value) * 0.01;
+    textBox.value = parseFloat(textBox.value) * 0.01;
     if (expression.editFirstNumber) {
-        singleKeyExpression.firstNumberPercent = !singleKeyExpression.firstNumberPercent;
-    } else {
-        singleKeyExpression.secondNumberPercent = !singleKeyExpression.secondNumberPercent;
+        expression.firstNumber = expression.firstNumber * 0.01;
     }
 });
-
-function resetSingleKeys() {
-    singleKeyExpression.firstNumberPi = false;
-    singleKeyExpression.firstNumberNegative = false;
-    singleKeyExpression.firstNumberPercent = false;
-    singleKeyExpression.firstNumberSquareRoot = false;
-    singleKeyExpression.secondNumberPi = false;
-    singleKeyExpression.secondNumberNegative = false;
-    singleKeyExpression.secondNumberPercent = false;
-    singleKeyExpression.secondNumberSquareRoot = false;
-}
-
-function checkForNegative(number, singleKeyExpression) {
-    if (singleKeyExpression) {
-        number = -number;
-    }
-    return number;
-}
-
-function checkForPi(number, singleKeyExpression) {
-    if (singleKeyExpression) {
-        number = Math.PI;
-    }
-    return number;
-}
-function checkForPercent(number, singleKeyExpression) {
-    if (singleKeyExpression) {
-        number = number * 0.01;
-    }
-    return number;
-}
-function checkForSquareRoot(number, singleKeyExpression) {
-    if (singleKeyExpression) {
-        number = Math.sqrt(number);
-    }
-    return number;
-}
