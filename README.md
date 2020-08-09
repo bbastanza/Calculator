@@ -4,7 +4,7 @@
 
 ![js](MDimages/javascript.png) ![html](MDimages/html.png) ![css](MDimages/css.png)
 
-Check out the app [here](https://bbastanza.github.io/calculator/)
+Check out the calculator [HERE](https://bbastanza.github.io/calculator/)
 
 ![Screenshot](MDimages/screenshot.png)
 
