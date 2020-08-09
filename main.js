@@ -66,10 +66,17 @@ function displayAnswer() {
     if (expression.firstNumber === "") {
         expression.firstNumber = parseFloat(textBox.value);
         return;
+    } else if (isNaN(expression.firstNumber)) {
+        expression.firstNumber = "";
+        textBox.value = "";
+        return;
     }
 
     expression.secondNumber = parseFloat(textBox.value);
-
+    if (isNaN(expression.secondNumber)) {
+        textBox.value = "";
+        return;
+    }
     const firstNumber = expression.firstNumber;
     const secondNumber = expression.secondNumber;
 

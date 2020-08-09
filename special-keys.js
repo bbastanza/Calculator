@@ -11,7 +11,7 @@ document.getElementById("pi").addEventListener("click", () => {
 });
 
 document.getElementById("square").addEventListener("click", () => {
-    if (textBox.value === "") {
+    if (textBox.value === "" || textBox.value === ".") {
         return;
     } else if (parseFloat(textBox.value) < 0) {
         alert("You can't take the Square Root of a negative number!");
@@ -38,7 +38,7 @@ document.getElementById("negative").addEventListener("click", () => {
 });
 
 document.getElementById("percent").addEventListener("click", () => {
-    if (textBox.value === "") {
+    if (textBox.value === "" || textBox.value === ".") {
         return;
     }
 
