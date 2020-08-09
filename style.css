@@ -9,7 +9,7 @@ body {
 #container {
     width: 400px;
     margin: 50px auto;
-    justify-content: center;
+    justify-content: space-between;
     padding: 0, 0, 10px;
     background-color: rgba(28, 28, 28, 0.9);
     border: 10px solid rgb(255, 102, 102);
@@ -58,9 +58,9 @@ body {
     width: 167px;
 }
 
-#memory {
+#memory-display {
     color: bisque;
-    background-color: black;
+    background-color: rgb(0, 0, 0, 0.2);
     width: 300px;
     margin: 10px auto 20px;
     padding: 10px;
