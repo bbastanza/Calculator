@@ -9,7 +9,13 @@
     <body>
         <div id="container">
             <div id="text">
-                <input id="text-box" type="text" onkeypress="return isTextInputANumber(event)" onpaste="return false" />
+                <input
+                    id="text-box"
+                    type="text"
+                    onkeypress="return isTextInputANumber(event)"
+                    maxlength="18"
+                    onpaste="return false"
+                />
             </div>
 
             <div id="line-1">

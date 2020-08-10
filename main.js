@@ -18,13 +18,17 @@ const expression = {
 };
 
 document.getElementById("decimal").addEventListener("click", () => {
-    for (let c of textBox.value) {
-        if (c === ".") {
+    for (let character of textBox.value) {
+        if (character === ".") {
             return;
         }
     }
     if (expression.continuousText) {
-        textBox.value += ".";
+        if (textBox.value.length > 17) {
+            return;
+        } else {
+            textBox.value += ".";
+        }
     } else {
         textBox.value = ".";
         expression.continuousText = true;
@@ -36,7 +40,11 @@ for (let i = 0; i < numberKeys.length; i++) {
     const numberKey = numberKeys[i];
     numberKey.addEventListener("click", function (e) {
         if (expression.continuousText) {
-            textBox.value += e.target.value;
+            if (textBox.value.length > 17) {
+                return;
+            } else {
+                textBox.value += e.target.value;
+            }
         } else {
             textBox.value = e.target.value;
             expression.continuousText = true;
