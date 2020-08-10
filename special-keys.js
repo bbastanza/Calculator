@@ -29,7 +29,7 @@ document.getElementById("negative").addEventListener("click", () => {
         textBox.value = "-";
         expression.continuousText = true;
     } else {
-        textBox.value = -textBox.value;
+        textBox.value -= textBox.value * 2;
 
         if (expression.editFirstNumber) {
             expression.firstNumber = textBox.value;

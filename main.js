@@ -101,24 +101,28 @@ function displayAnswer() {
 
 function addNumbers(number1, number2) {
     const result = parseFloat(number1) + parseFloat(number2);
+    if (!checkResultLength(result)) return;
     textBox.value = result;
     updateExpression(result);
 }
 
 function subtractNumbers(number1, number2) {
     const result = parseFloat(number1) - parseFloat(number2);
+    if (!checkResultLength(result)) return;
     textBox.value = result;
     updateExpression(result);
 }
 
 function multiplyNumbers(number1, number2) {
     const result = parseFloat(number1) * parseFloat(number2);
+    if (!checkResultLength(result)) return;
     textBox.value = result;
     updateExpression(result);
 }
 
 function divideNumbers(number1, number2) {
     const result = parseFloat(number1) / parseFloat(number2);
+    if (!checkResultLength(result)) return;
     textBox.value = result;
     updateExpression(result);
 }
@@ -127,6 +131,14 @@ function updateExpression(number) {
     expression.firstNumber = number;
     expression.secondNumber = "";
     expression.continuousText = false;
+}
+
+function checkResultLength(result) {
+    if (result.toString().length > 19) {
+        alert("That number is a little too big for this app... Sorry :(");
+        return false;
+    }
+    return true;
 }
 
 function clearBoxValue() {
