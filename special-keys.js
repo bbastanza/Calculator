@@ -1,83 +1,88 @@
-document.getElementById("clear").addEventListener("click", () => {
+const clearButton = document.getElementById("clear");
+const piButton = document.getElementById("pi");
+const squareRootButton = document.getElementById("square");
+const negativeButton = document.getElementById("negative");
+const percentButton = document.getElementById("percent");
+const memoryPlusButton = document.getElementById("memory-plus");
+const memoryMinusButton = document.getElementById("memory-minus");
+const memoryRecallButton = document.getElementById("memory-recall");
+const memoryClearButton = document.getElementById("memory-clear");
+const allClearButton = document.getElementById("all-clear");
+const memoryDisplay = document.getElementById("memory-display");
+
+clearButton.addEventListener("click", () => {
     clearBoxValue();
 });
 
-document.getElementById("pi").addEventListener("click", () => {
+piButton.addEventListener("click", () => {
     textBox.value = Math.PI;
 
-    if (expression.editFirstNumber) {
-        expression.firstNumber = Math.PI;
+    if (expression.editFirstNumber) return (expression.firstNumber = Math.PI);
+});
+
+squareRootButton.addEventListener("click", () => {
+    switch (textBox.value) {
+        case "":
+            console.log(1);
+            break;
+        case ".":
+            console.log(2);
+            break;
+        default:
+            if (parseFloat(textBox.value) < 0) return alert("You can't take the Square Root of a negative number!");
+            textBox.value = Math.sqrt(textBox.value);
+            if (expression.editFirstNumber) return (expression.firstNumber = textBox.value);
     }
 });
 
-document.getElementById("square").addEventListener("click", () => {
-    if (textBox.value === "" || textBox.value === ".") {
-        return;
-    } else if (parseFloat(textBox.value) < 0) {
-        alert("You can't take the Square Root of a negative number!");
-        return;
-    }
-    textBox.value = Math.sqrt(textBox.value);
-
-    if (expression.editFirstNumber) {
-        expression.firstNumber = textBox.value;
-    }
-});
-
-document.getElementById("negative").addEventListener("click", () => {
+negativeButton.addEventListener("click", () => {
     if (textBox.value === "") {
         textBox.value = "-";
         expression.continuousText = true;
     } else {
         textBox.value = -textBox.value;
 
-        if (expression.editFirstNumber) {
-            expression.firstNumber = textBox.value;
-        }
+        if (expression.editFirstNumber) return (expression.firstNumber = textBox.value);
     }
 });
 
-document.getElementById("percent").addEventListener("click", () => {
-    if (textBox.value === "" || textBox.value === ".") {
-        return;
-    }
-
-    textBox.value = parseFloat(textBox.value) * 0.01;
-
-    if (expression.editFirstNumber) {
-        expression.firstNumber = textBox.value;
+percentButton.addEventListener("click", () => {
+    switch (textBox.value) {
+        case "":
+            break;
+        case ".":
+            break;
+        default:
+            textBox.value = parseFloat(textBox.value) * 0.01;
+            if (expression.editFirstNumber) return (expression.firstNumber = textBox.value);
     }
 });
 
-const memory = document.getElementById("memory-display");
-
-document.getElementById("memory-plus").addEventListener("click", () => {
+memoryPlusButton.addEventListener("click", () => {
     expression.memoryNumber = expression.memoryNumber + parseFloat(textBox.value);
-    memory.textContent = `Memory: ${expression.memoryNumber}`;
+    memoryDisplay.textContent = `Memory: ${expression.memoryNumber}`;
 });
 
-document.getElementById("memory-minus").addEventListener("click", () => {
+memoryMinusButton.addEventListener("click", () => {
     expression.memoryNumber = expression.memoryNumber - parseFloat(textBox.value);
-    memory.textContent = `Memory: ${expression.memoryNumber}`;
+    memoryDisplay.textContent = `Memory: ${expression.memoryNumber}`;
 });
 
-document.getElementById("memory-recall").addEventListener("click", () => {
+memoryRecallButton.addEventListener("click", () => {
     textBox.value = expression.memoryNumber;
 
-    if (expression.editFirstNumber) {
-        expression.firstNumber = expression.memoryNumber;
-    }
+    if (expression.editFirstNumber) return (expression.firstNumber = expression.memoryNumber);
 });
 
-document.getElementById("memory-clear").addEventListener("click", () => {
+memoryClearButton.addEventListener("click", () => {
     expression.memoryNumber = 0;
-    memory.textContent = `Memory: ${expression.memoryNumber}`;
+    memoryDisplay.textContent = `Memory: ${expression.memoryNumber}`;
 });
 
-document.getElementById("all-clear").addEventListener("click", () => {
+allClearButton.addEventListener("click", () => {
     clearBoxValue();
     expression.memoryNumber = 0;
-    memory.textContent = `Memory: ${expression.memoryNumber}`;
+    memoryDisplay.textContent = `Memory: ${expression.memoryNumber}`;
 });
 
 function isTextInputANumber(e) {
