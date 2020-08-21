@@ -23,10 +23,8 @@ piButton.addEventListener("click", () => {
 squareRootButton.addEventListener("click", () => {
     switch (textBox.value) {
         case "":
-            console.log(1);
             break;
         case ".":
-            console.log(2);
             break;
         default:
             if (parseFloat(textBox.value) < 0) return alert("You can't take the Square Root of a negative number!");
