@@ -16,6 +16,12 @@ Building this app I had to figure out calculations using more challenging logic 
 
 While building this application I had to problem solve to make this calculator use continuous function, know when to edit which number and to use the memory buttons correctly.
 
+#
+
 ## Author
 
-Brian Bastanza- Full Stack Web Developer
+### Brian Bastanza- Full Stack Web Developer
+
+[Personal Website](www.brianbastanza.com)
+
+[LinkedIn](www.linkedin.com/in/brian-bastanza-9035397b)
