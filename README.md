@@ -22,6 +22,6 @@ While building this application I had to problem solve to make this calculator u
 
 ### Brian Bastanza- Full Stack Web Developer
 
-[Personal Website](www.brianbastanza.com)
+[Personal Website](www.brianbastanza.me)
 
 [LinkedIn](www.linkedin.com/in/brian-bastanza-9035397b)
