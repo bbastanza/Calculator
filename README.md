@@ -12,7 +12,7 @@ Check out the calculator [here](https://bbastanza.github.io/Calculator/)
 
 I made this app continuing to further my knowledge of Javascript, HTML and CSS.
 
-Building this app I had to figure out calculations using more challenging logic than I had used in previous applications. I had a lot of fun with this writing the applications functionallity and style.
+Building this app I had to figure out calculations using more challenging logic than I had used in previous applications. I had a lot of fun with this writing the application's functionallity and style.
 
 While building this application I had to problem solve to make this calculator use continuous function, know when to edit which number and to use the memory buttons correctly.
 
